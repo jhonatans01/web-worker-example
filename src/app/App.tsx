@@ -5,14 +5,16 @@ import userService from '../service/userService';
 function App() {
   const [nameToDisplay, setName] = useState('');
 
-  const handeUserInfo = async () => {
+  async function handeUserInfo() {
     if (navigator.onLine) {
       const { name } = await userService.fetchUserOnline();
       userService.saveUserOffline(name?.first);
 
       setName(name?.first);
     } else {
-      userService.fetchUserOffline();
+      const name = userService.fetchUserOffline();
+
+      setName(name || '');
     }
   }
 

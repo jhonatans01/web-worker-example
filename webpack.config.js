@@ -1,9 +1,11 @@
 const path = require("path");
-// const workboxPlugin = require("workbox-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: "./src/index.tsx",
+  entry: {
+    bundle: "./src/index.tsx",
+    sw: "./src/serviceWorker.js",
+  },
   mode: "development",
   devServer: {
     compress: true,
@@ -31,17 +33,15 @@ module.exports = {
     extensions: [".tsx", ".ts", ".js"],
   },
   output: {
-    filename: "bundle.js",
+    filename: "[name].js",
     path: path.resolve(__dirname, "dist"),
   },
   plugins: [
     new HtmlWebpackPlugin({
+      name: "index.html",
+      inject: false,
       title: "Output Management",
       template: "./public/index.html",
     }),
-    // new workboxPlugin.InjectManifest({
-    //   swSrc: path.resolve(__dirname, "src") + "/serviceWorker.js",
-    //   swDest: "sw.js",
-    // }),
   ],
 };

@@ -15,13 +15,9 @@ const fetchUserOnline = async () => {
   }
 }
 
-const fetchUserOffline = () => {
-  userRepository.getUser();
-}
+const fetchUserOffline = () => userRepository.getUser();
 
-const saveUserOffline = (name: string) => {
-  userRepository.saveUser(name);
-}
+const saveUserOffline = (name: string) => userRepository.saveUser(name);
 
 const userService = {
   fetchUserOnline,
